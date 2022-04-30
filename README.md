@@ -9,7 +9,8 @@
 ## SECTION 2 : EXECUTIVE SUMMARY / PAPER ABSTRACT
 
 
-Our team had an amazing time working on this project, and hope to share our insights with everyone. Despite a focus on BTO flats, we would recommend it for everybody interested in understanding property market trends for residence or investment purposes. There truly are a wide array of factors behind the decision to invest in a property, and we only wish there was more time to work on the scope and scale of the project. 
+In recent years with artificial intelligence (AI), it has been shown that the usability of machines is enhanced when they become capable to process data, finding patterns, and suggesting proper actions. In this project, a model for semantic memory is used that allows machines to collect information and experiences to become more proficient with time. By analysing the image data, the processed information is stored in the knowledge graph which is then used to comprehend the work instructions expressed in natural language. This imparts industrial robots’ behaviour to execute the required tasks in a deterministic manner.
+Programming these robots or replicating their tasks onto another robot requires a lot of effort. A typical robotic application requires a specialist to break down the complicated task into smaller sub-tasks and actions. The expert writes detailed instructions in the form of robot programs to make the robot accomplish the desired task. This process needs a high level of expertise and is time-consuming. With the shortages in skilled manpower and resources to train the workforce, it is important we need to capture the factory process into a knowledge base system. The future factory automation process will depend on the task-oriented knowledge graph 
 
 ---
 
