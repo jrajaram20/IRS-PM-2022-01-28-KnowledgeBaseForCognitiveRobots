@@ -49,7 +49,7 @@ def trackxy(filename):
                average = cv2.mean(thresh)[0]
                print("average =",average)
                if average == 0:
-                    color = "white"
+                    color = "green"
                else:
                     color = "red"
                #print(cropi)
@@ -75,19 +75,19 @@ def trackxy(filename):
                          left_elbows.append(left)
                          right_elbows.append(right)
                          ff = findfinger(image)
-                         if(fingers_gap != None):
+                         if(ff != None):
                               fingers_gap.append(ff)
                     except:
                          pass
                
           else:
                cv2.putText(frame,'Error',(100,0),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),2)
-          cv2.imshow('Tracking',frame)
+          cv2.imshow('Full analysis',frame)
           if cv2.waitKey(1) & 0XFF==27:
              break
      cv2.destroyAllWindows()
      item_distance = math.hypot(tempx-homex, tempy-homey)
-     cycletime = (frame_number[-1]-frame_number[0])/fps
+     cycletime = int((frame_number[-1]-frame_number[0])/fps)
      #print(fingers_gap)
      gap_ave = round(mean(fingers_gap),2)
      #print(gap_ave)
@@ -96,8 +96,14 @@ def trackxy(filename):
      max_ri = max(right_elbows)
      min_ri = min(right_elbows)
      #'redcoins','w_20','a_130','xy_100_100','c_1','d_130')
-     print(color, tempx,tempy,item_distance, cycletime, max_le,min_le,max_ri,min_ri,gap_ave)
-     return  color,gap_ave,min_le,min_ri,'xy_'+tempx+'_'+tempy,cycletime, item_distance
+     #print(color, tempx,tempy,item_distance, cycletime, max_le,min_le,max_ri,min_ri,gap_ave)
+     finxy = "xy_"+str(tempx)+'_'+str(tempy)
+     gap_ave = "w_"+str(gap_ave)
+     min_ri = "a_"+str(min_ri)
+     cycletime = "c_"+str(cycletime)
+     distance ="d_"+str(item_distance)
+     print(color,gap_ave,min_le,finxy,cycletime, item_distance)
+     return  color,gap_ave,min_le,finxy,cycletime, item_distance
      #return  color,tempx,tempy,item_distance, cycletime, max_le,min_le,max_ri,min_ri,gap_ave
 
 if __name__ == '__main__':
