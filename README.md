@@ -25,7 +25,7 @@ Programming these robots or replicating their tasks onto another robot requires 
 
 ## SECTION 4 : VIDEO OF SYSTEM MODELLING & USE CASE DEMO
 
-[![Sudoku AI Solver](http://img.youtube.com/vi/-AiYLUjP6o8/0.jpg)](https://youtu.be/-AiYLUjP6o8 "Sudoku AI Solver")
+Google Drive link : 
 
 
 ---
@@ -89,14 +89,6 @@ Data will be captured only when the selected item is moved in the video.
   
 
 10)	Data captured will be updated to the knowledge base. For reference purpose the same data will be saved to robot.csv file.
-
-
-### [ 2 ] To run the system in other/local machine:
-### Install additional necessary libraries. This application works in python 2 only.
-
-> $ sudo apt-get install python-clips clips build-essential libssl-dev libffi-dev python-dev python-pip
-
-> $ pip install pyclips flask flask-socketio eventlet simplejson pandas
 
 ---
 ## SECTION 6 : PROJECT REPORT / PAPER
