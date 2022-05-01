@@ -6,7 +6,7 @@ from neo4j.exceptions import ServiceUnavailable
 #from py2neo import Graph
 import sys
 import string
-from Robotserver import *
+
 
 
 class Recommender:
@@ -98,6 +98,26 @@ class Recommender:
             print("position for color:", result[0])
             return result[0]
 
+    def querygripperwidth(self,value):
+        CL = '"'+value.upper()+'"'
+        query = '''MATCH (Gwidth)<-[:GWIDTH]-(color)-[:COLOR]->('''+value+''':Color {name: '''+CL+'''})
+                   RETURN DISTINCT Gwidth.name As pname'''
+        with self.driver.session() as graphDB_Session:
+            result = graphDB_Session.run(query)
+            result  = ([record["pname"] for record in result])
+            print("Gripper width is :", result[0])
+            return "w_30"
+    
+    def queryangle(self,value):
+        CL = '"'+value.upper()+'"'
+        query = '''MATCH (Elbow)<-[:J3ANGLE]-(color)-[:COLOR]->('''+value+''':Color {name: '''+CL+'''})
+                   RETURN DISTINCT Elbow.name As pname'''
+        with self.driver.session() as graphDB_Session:
+            result = graphDB_Session.run(query)
+            result  = ([record["pname"] for record in result])
+            print("Joint3 angle :", result[0])
+            return result[0]
+
     def queryplaceposition(self):
         query = '''MATCH (Position)<-[:POSITION]-(color)-[:COLOR]->(red:Color {name: "RED"})
                    MATCH (Position)<-[:POSITION]-(shape)-[:SHAPE]->(circle:Shape {name: "CIRCLE"})
@@ -126,6 +146,39 @@ class Recommender:
             #    print(r)
             return result
 
+    def update(self,iname,gwidth,eangle,finalxy,ctime,dist):
+        GW = gwidth.upper()
+        EA = eangle.upper()
+        IN = iname.upper()
+        FXY = finalxy.upper()
+        CT = ctime.upper()
+        DIST = dist.upper()
+        
+        query = '''CREATE('''+gwidth+''':Gwidth {name:"'''+GW+'''"})
+                    CREATE('''+eangle+''':Elbow {name:"'''+EA+'''"})
+                    CREATE('''+finalxy+''':Finalxy {name:"'''+FXY+'''"})
+                    CREATE('''+ctime+''':Ctime {name:"'''+CT+'''"})
+                    CREATE('''+dist+''':Distance {name:"'''+DIST+'''"})'''
+
+        query1= '''    MATCH('''+gwidth+''':Gwidth {name:"'''+GW+'''"})
+            MATCH('''+eangle+''':Elbow {name:"'''+EA+'''"})
+            MATCH('''+finalxy+''':Finalxy {name:"'''+FXY+'''"})
+            MATCH('''+ctime+''':Ctime {name:"'''+CT+'''"})
+            MATCH('''+dist+''':Distance {name:"'''+DIST+'''"})
+            MATCH('''+iname+''':Itemname {name:"'''+IN+'''"})
+            CREATE('''+iname+''')-[:GWIDTH]->('''+gwidth+''')
+            CREATE('''+iname+''')-[:J3ANGLE]->('''+eangle+''')
+            CREATE('''+iname+''')-[:FINALXY]->('''+finalxy+''')
+            CREATE('''+iname+''')-[:CTIME]->('''+ctime+''')
+            CREATE('''+iname+''')-[:DISTANCE]->('''+dist+''')'''
+            
+        with self.driver.session() as graphDB_Session:
+            result  = graphDB_Session.run(query)
+            result  = graphDB_Session.run(query1)
+            #result  = ([record["color"] for record in result])
+            #print(*result)
+            return result
+
     def location(self):
         cql = "MATCH (x) RETURN x"
         # Execute the CQL query
@@ -148,13 +201,16 @@ if __name__ == "__main__":
     
     app = Recommender(uri, user, password)
 
-    #app.clearDB()
-    #app.createDB()
+    app.clearDB()
+    app.createDB()
     #s = app.querygripper()
    
     #app.queryplaceposition()
-    s = app.queryplaceforcolor("red")
-    print(s)
+    app.update('redcoins','w_20','a_130','xy_100_100','c_1','d_130')
+    #app.querygripperwidth('red')
+    ##app.queryangle('red')
+    #s = app.queryplaceforcolor("red")
+    #print(s)
     #app.querypickattrib("p42")
     #app.location()
     app.close()
