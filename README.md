@@ -32,25 +32,64 @@ Programming these robots or replicating their tasks onto another robot requires 
 
 ## SECTION 5 : USER GUIDE
 
-`Refer to appendix <Installation & User Guide> in project report at Github Folder: ProjectReport`
+The code can be executed from python environment. Below is the software requirement 
+•	mediapipe
+•	pyttsx3
+•	nltk
+•	speechrecognition
+•	neo4j
+•	opencv-python
+•	tensorflow
+•	pyaudio
+•	python 3.8
 
-### [ 1 ] To run the system using iss-vm
 
-> download pre-built virtual machine from http://bit.ly/iss-vm
+Steps to run the system:
+1)	Download the files from GitHub.
+Here is the file Structure
+ - main.py
+ - bodypose_analyze.py
+ - handpose_analyze.py
+ - robotserver.py
+ - tp_final.py
+ - graphdb.py
+ - chatbot.py
+ - video.mp4
+   speech
+	- textpredict.py
+	- train.py
+	- chatbot_model.h5
+	- classes.pkl
+	- words.pkl
+	- intents.json
 
-> start iss-vm
+2)	Install anaconda and neo4j desktop in your PC.
+3)	Create a new conda environment with python 3.8
+4)	Activate your conda environment and install the below packages
+mediapipe
+pyttsx3
+nltk
+speechrecognition
+neo4j
+opencv-python
+tensorflow
+pyaudio
+python 3.8
 
-> open terminal in iss-vm
+5)	Make sure the neo4j database is active and running on your pc
+6)	Communication to the robot is through TCP Socket, so it’s easier to implement the code for any robot. 
+      
+7)	Run the main.py program from your anaconda environment. Next run the robot so it will start communicating to the python program
+8)	You can give voice commands to the system, 
+Example : “Create new database”, “update database from video”
+		“pickredcoins”, “pickblackbox”
 
-> $ git clone https://github.com/telescopeuser/Workshop-Project-Submission-Template.git
+9)	If you want to update the database from the video there will be a prompt to select the region of interest at the beginning of the video. After selecting the item hit enter key.
+Data will be captured only when the selected item is moved in the video.
+  
 
-> $ source activate iss-env-py2
+10)	Data captured will be updated to the knowledge base. For reference purpose the same data will be saved to robot.csv file.
 
-> (iss-env-py2) $ cd Workshop-Project-Submission-Template/SystemCode/clips
-
-> (iss-env-py2) $ python app.py
-
-> **Go to URL using web browser** http://0.0.0.0:5000 or http://127.0.0.1:5000
 
 ### [ 2 ] To run the system in other/local machine:
 ### Install additional necessary libraries. This application works in python 2 only.
@@ -64,22 +103,19 @@ Programming these robots or replicating their tasks onto another robot requires 
 
 `Refer to project report at Github Folder: ProjectReport`
 
-**Recommended Sections for Project Report / Paper:**
-- Executive Summary / Paper Abstract
-- Sponsor Company Introduction (if applicable)
-- Business Problem Background
+- Executive Summary
 - Market Research
-- Project Objectives & Success Measurements
-- Project Solution (To detail domain modelling & system design.)
-- Project Implementation (To detail system development & testing approach.)
-- Project Performance & Validation (To prove project objectives are met.)
-- Project Conclusions: Findings & Recommendation
+- Business Justification
+- Project Objectives 
+     - System Design
+     - Overview to create knowledge base from video
+- System Validation
+     -   Knowledge graph from experts
+     -   New Knowledge graph after video analysis
+- Resulting Output - Demo pictures
+- Project Conclusion
 - Appendix of report: Project Proposal
 - Appendix of report: Mapped System Functionalities against knowledge, techniques and skills of modular courses: MR, RS, CGS
 - Appendix of report: Installation and User Guide
-- Appendix of report: 1-2 pages individual project report per project member, including: Individual reflection of project journey: (1) personal contribution to group project (2) what learnt is most useful for you (3) how you can apply the knowledge and skills in other situations or your workplaces
-- Appendix of report: List of Abbreviations (if applicable)
-- Appendix of report: References (if applicable)
-
----
+- Appendix of report: Reflection on project journey
 
